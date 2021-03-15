@@ -1,0 +1,52 @@
+
+work_dir: ./output/autsl_skeleton_bone_half
+
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: data/hand/train_data_bone_b93.npy
+  label_path: data/hand/train_label.pkl
+  debug: False
+  # random_shift: True
+
+test_feeder_args:
+  data_path: data/hand/val_data_bone_b93.npy
+  label_path: data/hand/val_label.pkl
+
+# model
+model: model.msg3d.Model
+model_args:
+  num_class: 226
+  num_point: 93
+  num_person: 1
+  num_gcn_scales: 8
+  num_g3d_scales: 8
+  graph: graph.autsl_bone_93.AdjMatrixGraph
+
+# optim
+weight_decay: 0.0005
+# weight_decay: 0.0003
+base_lr: 0.135
+# base_lr: 0.1
+policy:
+  policy: 'cosine'
+  warmup_ratio: 0.01
+  warmup: 'linear'
+  warmup_iters: 37600
+
+# training
+num_epoch: 90
+# device: [0, 1]
+device: [0, 1, 2, 3, 4, 5, 6, 7]
+# batch_size: 32
+batch_size: 96
+# forward_batch_size: 32
+forward_batch_size: 96
+# test_batch_size: 32
+test_batch_size: 96
+test_interval: 5
+nesterov: True
+
+
+
+

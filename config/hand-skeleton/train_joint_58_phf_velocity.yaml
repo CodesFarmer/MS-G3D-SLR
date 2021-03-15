@@ -1,0 +1,45 @@
+
+work_dir: ./work_dir/kinetics/msg3d_joint
+
+# feeder
+feeder: feeders.feeder.Feeder
+train_feeder_args:
+  data_path: data/hand/train_data_velocity.npy
+  label_path: data/hand/train_label.pkl
+  debug: False
+
+test_feeder_args:
+  data_path: data/hand/val_data_velocity.npy
+  label_path: data/hand/val_label.pkl
+
+# model
+model: model.msg3d.Model
+model_args:
+  num_class: 226
+  num_point: 78
+  num_person: 1
+  num_gcn_scales: 8
+  num_g3d_scales: 8
+  in_channels: 3
+  graph: graph.autsl_face.AdjMatrixGraph
+
+# optim
+weight_decay: 0.0005
+# weight_decay: 0.0003
+base_lr: 0.135
+# base_lr: 0.1
+step: [60, 85]
+
+# training
+num_epoch: 90
+# device: [0, 1]
+device: [0, 1, 2, 3, 4, 5, 6, 7]
+batch_size: 96
+# batch_size: 128
+forward_batch_size: 96
+# forward_batch_size: 64
+test_batch_size: 96
+# test_batch_size: 128
+nesterov: True
+
+

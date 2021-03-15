@@ -1,0 +1,25 @@
+# feeder
+feeder: feeders.feeder.Feeder
+test_feeder_args:
+  data_path: data/hand/val_data_joint.npy
+  label_path: data/hand/val_label.pkl 
+  debug: False
+
+# model
+model: model.msg3d.Model
+model_args:
+  num_class: 226
+  num_point: 58
+  num_person: 1
+  num_gcn_scales: 8
+  num_g3d_scales: 8
+  graph: graph.kinetics.AdjMatrixGraph
+
+# test
+phase: test
+device: 0
+test_batch_size: 16
+weights: pretrained-models/checkpoint-60-fwbz96-17580.pt
+
+work_dir: ./eval/hand/joint/
+save_score: True
